@@ -40,14 +40,17 @@ How can HealthConnect Clinic use data to understand and reduce missed appointmen
 ## Data Quality Assessment
 
 ## Tools Used
+* Microsoft Excel
+* Power query
+* Microsoft Power BI
 
 ## Data Cleaning and Transformation in Excel
 
 ## Importing the Dataset into Power BI
 
 ## Data Analysis
-
-## KPIs Tracked
+### DAX Measures
+### KPIs Tracked
 
 ## Data Visualization
 
