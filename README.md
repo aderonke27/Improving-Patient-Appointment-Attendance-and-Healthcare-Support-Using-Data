@@ -10,17 +10,30 @@ HealthConnect Clinic loses operational efficiency and patient care capacity beca
 ## Central Project Question
 How can HealthConnect Clinic use data to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
 
-Project Question
-Dataset Description (link to data dictionary)
-Dataset Overview
-Data Quality Assessment
-Exploratory Data Analysis Highlights
-Week 4 — Problem Understanding & Initial Analysis Plan
-Week 5 — EDA, KPIs & Business Insights
-KPIs Tracked
-Key Findings & Recommendations
+## Project Question
 
-Limitations & Assumptions
-Tools Used
-Next Steps
-Author / Contact / LinkedIn
+## Dataset Description (link to data dictionary)
+
+## Dataset Overview
+
+## Data Quality Assessment
+
+## Exploratory Data Analysis Highlights
+
+## Week 4 — Problem Understanding & Initial Analysis Plan
+
+## Week 5 — EDA, KPIs & Business Insights
+
+## KPIs Tracked
+
+## Key Findings & Recommendations
+
+## Limitations & Assumptions
+
+## Tools Used
+
+## Next Steps
+
+## Contact Information
+* LinkedIn: https://www.linkedin.com/in/estheraderonke
+* Email: aladeloyeesther616@gmail.com
