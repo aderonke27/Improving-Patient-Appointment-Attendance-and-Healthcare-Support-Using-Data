@@ -1,4 +1,24 @@
 # Improving-Patient-Appointment-Attendance-and-Healthcare-Support-Using-Data-And-AI
+![Power BI](https://img.shields.io/badge/Tool-Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)
+![Status](https://img.shields.io/badge/Status-Completed-purple)
+![Domain](https://img.shields.io/badge/Domain-Healthcare%20Analytics-red)
+
+## Table of Contents
+1. [Project Overview](#project-overview)  
+2. [Project Description](#project-description)
+3. [Project Aim](#project-aim)  
+4. [About the Dataset](#about-the-dataset)
+5. [Tools Used](#tools-used)  
+6. [Importing the Dataset](#importing-the-dataset)  
+7. [Data Cleaning and Transformation](#data-cleaning-and-transformation)
+8. [Data Modeling](#data-modeling)  
+9. [Data Analysis](#data-analysis)  
+10. [Data Visualization](#data-visualization)  
+11. [Key Insights](#key-insights)  
+12. [Recommendations](#recommendations)  
+13. [Conclusion](#conclusion)
+14. [Contact Information](#contact-information)
+
 ## Project Overview
 This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
 HealthConnect Clinic is a fictional appointment-based healthcare provider used as a realistic case study for the programme. The project simulates a real-world data team, with interns working across five professional tracks — Project Management, Data Analytics, Data Science, Machine Learning Engineering, and Generative AI — all contributing to one shared objective: helping the clinic use data and AI to improve appointment attendance and patient support.
