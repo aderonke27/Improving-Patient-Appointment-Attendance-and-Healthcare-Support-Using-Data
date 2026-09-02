@@ -36,8 +36,31 @@ How can HealthConnect Clinic use data to understand and reduce missed appointmen
 ## Project Questions
 
 ## Dataset Overview
+### Dataset description
+The HealthConnect Appointment Dataset is a fictional, anonymized dataset representing patient appointment records at HealthConnect Clinic. It captures patient demographics, appointment scheduling details, booking behavior, prior appointment history, reminder activity, distance to the clinic, waiting time, and the final outcome of each appointment (Attended, No-Show or Cancelled).
+### Dataset Size
+* Records (rows): 5,000 individual appointments
+* Variables (columns): 18
+* Unique patients: 1,696 (an average of roughly 2.9 appointments per patient, confirming the dataset is appointment-level, not patient-level, and that most patients appear more than once)
+* Appointment ID range: HC-00001 to HC-05000 (no gaps or duplicate IDs found)
+* Date coverage: booking dates from November 2024 to June 2026; appointment dates from January 2025 to June 2026
+### Variable categories
+The 18 variables fall into six broad categories relevant to the no-show problem:
+*	Patient demographics: gender, age, age_group
+*	Appointment details: appointment_id, appointment_type, appointment_dav, appointment_time
+*	Booking information: booking_date, appointment_date, booking_lead_days
+*	Patient history: previous_appointments, previous_no_shows
+*	Reminder information: reminder_sent, reminder_channel
+*	Clinic logistics: distance_to_clinics_km, waiting_time_minutes
+*	Outcome: appointment_outcome 
+### Data source
+The dataset was provided by AnalystLab Africa as an official project resource for the HealthConnect Experience Lab. It is explicitly fictional and synthetic, generated to simulate realistic clinic appointment data for learning purposes. No real patient information is contained in the file.
 
 ## Data Quality Assessment
+* In the raw CSV file, booking_date and appointment_date were stored as text strings instead of date type. All other data types were correct.
+* Two variables contained missing values; distance_to_clinic_km and waiting_time_minutes. 
+* No duplicates were found in the dataset.
+* The dataset exhibited high format uniformity and consistency.
 
 ## Tools Used
 * Microsoft Excel
