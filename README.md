@@ -4,19 +4,23 @@
 
 ## Table of Contents
 1. [Project Overview](#project-overview)  
-2. [Project Description](#project-description)
-3. [Project Aim](#project-aim)  
-4. [About the Dataset](#about-the-dataset)
-5. [Tools Used](#tools-used)  
-6. [Importing the Dataset](#importing-the-dataset)  
-7. [Data Cleaning and Transformation](#data-cleaning-and-transformation)
-8. [Data Modeling](#data-modeling)  
-9. [Data Analysis](#data-analysis)  
-10. [Data Visualization](#data-visualization)  
-11. [Key Insights](#key-insights)  
-12. [Recommendations](#recommendations)  
-13. [Conclusion](#conclusion)
-14. [Contact Information](#contact-information)
+2. [Business Problem](#business-problem)
+3. [Central Project Question](#central-project-question)
+4. [Project Questions](#project-questions)
+5. [Dataset Overview](#dataset-overview)
+6. [Data Quality Assessment](#data-quality-assessment)
+7. [Tools Used](#tools-used)
+8. [Data Cleaning and Transformation in Excel](#data-cleaning-and-transformation-in-excel) 
+9. [Importing the Dataset into Power BI](#importing-the-dataset-into-power-bi)  
+10. [Data Analysis](#data-analysis)
+11. [KPIs Tracked](#kpis-tracked)
+12. [Data Visualization](#data-visualization)  
+13. [Key Findings](#key-findings)  
+14. [Recommendations](#recommendations)  
+15. [Limitations](#limitations)
+16. [Assumptions](#assumptions)
+17. [Next Steps](#next-steps)
+18. [Contact Information](#contact-information)
 
 ## Project Overview
 This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
@@ -29,27 +33,31 @@ HealthConnect Clinic loses operational efficiency and patient care capacity beca
 ## Central Project Question
 How can HealthConnect Clinic use data to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
 
-## Project Question
-
-## Dataset Description (link to data dictionary)
+## Project Questions
 
 ## Dataset Overview
 
 ## Data Quality Assessment
 
-## Exploratory Data Analysis Highlights
+## Tools Used
 
-## Week 4 — Problem Understanding & Initial Analysis Plan
+## Data Cleaning and Transformation in Excel
 
-## Week 5 — EDA, KPIs & Business Insights
+## Importing the Dataset into Power BI
+
+## Data Analysis
 
 ## KPIs Tracked
 
-## Key Findings & Recommendations
+## Data Visualization
 
-## Limitations & Assumptions
+## Key Findings
 
-## Tools Used
+## Recommendations
+
+## Limitations
+
+## Assumptions
 
 ## Next Steps
 
