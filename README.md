@@ -23,16 +23,13 @@
 18. [Contact Information](#contact-information)
 
 ## Project Overview
-This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
-
-HealthConnect Clinic is a fictional appointment-based healthcare provider used as a realistic case study for the programme. The project simulates a real-world data team, with interns working across five professional tracks — Project Management, Data Analytics, Data Science, Machine Learning Engineering, and Generative AI — all contributing to one shared objective: helping the clinic use data and AI to improve appointment attendance and patient support.
-
-As the Data Analyst on this project, my contribution focuses on exploring the clinic's appointment data, assessing its quality, identifying patterns behind missed appointments, defining relevant KPIs, and generating actionable business insights. This work forms the analytical foundation that other tracks — particularly Data Science — build on for further modeling and prediction work.
+  This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
+  HealthConnect Clinic is a fictional appointment-based healthcare provider used as a realistic case study for the programme. The project simulates a real-world data team, with interns working across five professional tracks — Project Management, Data Analytics, Data Science, Machine Learning Engineering, and Generative AI — all contributing to one shared objective: helping the clinic use data and AI to improve appointment attendance and patient support.
+  As the Data Analyst on this project, my contribution focuses on exploring the clinic's appointment data, assessing its quality, identifying patterns behind missed appointments, defining relevant KPIs, and generating actionable business insights. This work forms the analytical foundation that other tracks — particularly Data Science — build on for further modeling and prediction work.
 
 ## Business Problem
-HealthConnect Clinic loses operational efficiency and patient care capacity because a significant number of scheduled appointments end in no-shows. Staff don't have a clear, data-driven understanding of which patients, appointment types, and booking conditions are most associated with missed visits, and appointment slots freed up by no-shows go unused.
-
-As a result, the clinic cannot reliably predict attendance risk, target reminders effectively, or plan capacity — leading to wasted clinical resources, longer wait times for other patients, and a weaker patient support experience.
+  HealthConnect Clinic loses operational efficiency and patient care capacity because a significant number of scheduled appointments end in no-shows. Staff don't have a clear, data-driven understanding of which patients, appointment types, and booking conditions are most associated with missed visits, and appointment slots freed up by no-shows go unused.
+  As a result, the clinic cannot reliably predict attendance risk, target reminders effectively, or plan capacity — leading to wasted clinical resources, longer wait times for other patients, and a weaker patient support experience.
 
 ## Central Project Question
 How can HealthConnect Clinic use data to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
@@ -72,6 +69,15 @@ The dataset was provided by AnalystLab Africa as an official project resource fo
 * Microsoft Power BI
 
 ## Data Cleaning and Transformation in Excel
+  The raw HealthConnect appointment data was cleaned and validated using Microsoft Excel Power Query. The original file was not modified. All cleaning was performed in a separate query and exported.
+  The raw dataset contained 5,000 records across 18 columns. After cleaning, the record count remained unchanged; no rows were added or removed.
+* The raw CSV was loaded into Excel, opening it directly in the Power Query Editor to keep the source file untouched.
+* Each column data type were confirmed and two columns (booking_date and appointment_date) stored as text strings were changed to date type.
+* `distance_to_clinic_km` (90 missing) and `waiting_time_minutes` (60 missing) were replaced with `"Unknown"` rather than dropped or imputed with a calculated value (e.g. mean/median). This avoids introducing bias into distance- and wait-time-related analysis while preserving the full sample size for other variables.
+* Used Power Query's "Remove Duplicates" preview on the full dataset and on `appointment_id` specifically. No duplicate rows or duplicate appointment IDs were found
+* Reviewed unique values across `gender`, `age_group`, `appointment_type`, `appointment_day`, `appointment_time`, `reminder_sent`, `reminder_channel`, and `appointment_outcome` for inconsistent spelling, casing, or stray whitespace.
+* All categories were already standardized; no corrections were needed
+* Closed and loaded the validated query into a new sheet, then exported it as `HealthConnect_Appointment_Cleaned_Data.csv` for use in analysis.
 
 ## Importing the Dataset into Power BI
 
