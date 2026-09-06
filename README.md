@@ -35,6 +35,26 @@
 How can HealthConnect Clinic use data to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
 
 ## Project Questions
+* What % of appointments end in No-Show / Attended / Cancelled?
+* What is the trend of the no-show rate over time?
+* How many visits were lost to no-shows in total?
+* Which day of the week had the highest no-show rate?
+* Which time slot had the highest no-show rate?
+* Did appointments booked further in advance have higher no-show rates?
+* Which day × time combinations had the worst rates?
+* Did no-show rates differ by age group?
+* Which gender is at risk of no-show?
+* Does distance correlate with no-shows?
+* Did patients with more past no-shows also have no-shows this time?
+* Did frequent patients no-show less than new patients?
+* Which appointment type had the highest no-show rate?
+* Does a reminder reduce no-shows?
+* Which reminder channel had the lowest no-show rate?
+* Was longer waiting time associated with more no-shows?
+* How many appointment slots were lost per month?
+* Which appointment type lost the most total slots?
+* Which combinations of prior no-show history and booking lead time had the highest no-show rates — and does the effect of one factor get stronger or weaker depending on the other?
+* Among past appointments, did the relationship between distance to the clinic and no-show rate differ across age groups? Was distance a bigger barrier for some age groups than others?
 
 ## Dataset Overview
 ### Dataset description
