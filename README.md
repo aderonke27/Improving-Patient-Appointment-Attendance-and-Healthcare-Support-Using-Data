@@ -80,6 +80,7 @@ The 18 variables fall into six broad categories relevant to the no-show problem:
 * The dataset exhibited high format uniformity and consistency.
 
 ## Tools Used
+* Microsoft Excel
 * Power query
 * Microsoft Power BI
 
