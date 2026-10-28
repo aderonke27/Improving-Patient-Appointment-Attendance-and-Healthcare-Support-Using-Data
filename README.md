@@ -13,14 +13,14 @@
 8. [Data Cleaning and Transformation in Excel](#data-cleaning-and-transformation-in-excel) 
 9. [Importing the Dataset into Power BI](#importing-the-dataset-into-power-bi)  
 10. [Data Analysis](#data-analysis)
-11. [KPIs Tracked](#kpis-tracked)
-12. [Data Visualization](#data-visualization)  
-13. [Key Findings](#key-findings)  
-14. [Recommendations](#recommendations)
-15. [Cross-Track Collaboration Summary](cross-track-collaboration-summary)
-16. [Limitations](#limitations)
-17. [Assumptions](#assumptions)
-18. [Next Steps](#next-steps)
+11. [Data Visualization](#data-visualization)  
+12. [Key Findings](#key-findings)  
+13. [Recommendations](#recommendations)
+14. [Cross-Track Collaboration Summary](cross-track-collaboration-summary)
+15. [Limitations](#limitations)
+16. [Assumptions](#assumptions)
+17. [Next Steps](#next-steps)
+18. [Project Files](#project-files)
 19. [Contact Information](#contact-information)
 
 ## Project Overview
@@ -144,44 +144,27 @@ Total Appointments is the denominator for every rate. No-Show Rate % drives the 
 
 The outcome donut on Page 1 counts `appointment_id` directly instead of using Total Appointments. I compared the two in Week 7 and they return the same total.
 
-### KPIs Tracked
-The five KPIs tracked were defined, calculated, tested statistically by the Data Scientist, and rechecked against the raw data;
-
-**1. Overall No-Show Rate.** Business question: what is the no-show rate, and how does it vary by appointment type, day and time? Result: **48.46%** of all appointments (2,423 of 5,000), or **51.15%** when Cancelled appointments are left out. Nearly one appointment in two is missed, and the monthly rate stays roughly between 42% and 54%, so the problem is structural, not seasonal.
-
-**2. No-Show Rate by Reminder Status and Channel.** Business question: does a reminder, and the channel used, reduce no-shows? Result: 51.39% with no reminder against 47.36% with one. By channel, SMS is 45.75%, Email 48.41% and WhatsApp 49.77%. Reminders help a little, and the channel matters more than whether one was sent.
-
-**3. No-Show Rate by Lead-Time Band.** Business question: how does booking lead time relate to no-shows, and where does risk jump? Result on the dashboard: 0-7 days 27.81%, 8-14 days 33.55%, 15-30 days 43.21%, 31-60 days 60.49%. Data Science split the top band in Week 6 and found 57.03% at 31-45 days and 71.36% at 46-60 days, so the single 31-60 bar hides a big jump. This is the strongest driver in the data.
-
-**4. Repeat No-Show Rate.** Business question: does prior no-show history predict future no-shows? Result: 43.51% with 0 prior no-shows, 53.49% with 1, 59.36% with 2, 67.95% with 3 and 73.33% with 4 or more. It's the strongest patient-level signal. The 3 and 4+ groups hold only 78 and 15 patients, so treat them as direction only.
-
-**5. No-Show Rate by Distance Band.** Business question: is distance a barrier to attendance? Result on the dashboard: 0-5 km 49.37%, 25+ km 46.47%, Unknown 52.22%. Data Science's finer six-band cut on 4,737 records ran from 48.69% at 0-5 km up to 70.00% at 31-50 km. The effect is real but small (Cramér's V = 0.06), and the 31-50 km band has only 70 records.
-
-**Combined risk segment (Week 6).** Patients with 2 or more prior no-shows and a lead time of 31+ days miss 75.56% of appointments (n = 225). Patients with no prior no-shows who book within 7 days miss 22.82% (n = 355). That's a 3.3x gap.
-
-**Two bases, both correct.** 48.46% uses all 5,000 appointments. 51.15% and the Week 6 band figures use the 4,737 Attended and No-Show records that went into modelling. Label which base a chart uses.
-
 ## Data Visualization
-
-The Power BI file (`AnalystLab_W5_P1.pbix`) has four pages, ordered so the story builds: scale of the problem, then timing, then patient risk, then what the clinic can change.
-
 ### Page 1: Overview Dashboard
-![Overview Dashboard](dashboard/page1_overview.png)
+<img width="1453" height="820" alt="Screenshot (265)" src="https://github.com/user-attachments/assets/e0c600ff-3ccf-46ff-9017-4ae324b06b97" />
 
-Five KPI cards (total appointments, No-Show Rate %, Attended Rate %, Cancelled Rate %, No-Shows), the outcome donut (48.46% No-Show, 46.28% Attended, 5.26% Cancelled), the monthly no-show rate, and no-shows by gender. Slicers for appointment type, appointment date and reminder sent filter this page only.
+Five KPI cards (total appointments, No-Show Rate, Attended Rate %, Cancelled Rate %, No-Shows), the outcome donut (48.46% No-Show, 46.28% Attended, 5.26% Cancelled), the monthly no-show rate, and no-shows by gender. Slicers for appointment type, appointment date and reminder sent filter this page only.
 
 ### Page 2: Timing and Booking Patterns
-![Timing and Booking Patterns](dashboard/page2_timing_booking.png)
+<img width="1451" height="819" alt="Screenshot (266)" src="https://github.com/user-attachments/assets/285a25b9-a884-4a01-b17d-05dc3b2482dc" />
+
 
 The Worst Month Rate card (53.85%), a day-by-time matrix, and no-show rate by time, day, age group and lead time. Lead time climbs from 27.81% to 60.49% while day, time and age barely move. The Friday evening cell in the matrix (58.51%) is the highest, but it's a single cell, so don't over-read it.
 
 ### Page 3: Patient Risk Profile
-![Patient Risk Profile](dashboard/page3_patient_risk.png)
+<img width="1454" height="813" alt="Screenshot (267)" src="https://github.com/user-attachments/assets/997755f8-533c-4799-aad5-f49d47f7274e" />
+
 
 Distance by age group, reminder sent against not sent, visit frequency, distance, prior no-shows, and a bubble chart of prior no-shows against rate and volume. Prior no-shows is the cleanest line on the page, rising from 43.51% to 73.33%.
 
 ### Page 4: Levers and Capacity Impact
-![Levers and Capacity Impact](dashboard/page4_levers_capacity.png)
+<img width="1467" height="811" alt="Screenshot (268)" src="https://github.com/user-attachments/assets/64a794ce-4210-48e0-933c-a02cf5026dc8" />
+
 
 No-show rate by appointment type and by reminder channel, no-shows by waiting time, no-shows by month, no-show counts by appointment type, and a prior-no-shows by lead-time matrix. Follow-up has the highest rate (51.23%) but General Consultation loses the most slots (973).
 
