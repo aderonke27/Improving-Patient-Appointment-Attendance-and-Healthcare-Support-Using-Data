@@ -146,10 +146,8 @@ The outcome donut on Page 1 counts `appointment_id` directly instead of using To
 
 ## Data Visualization
 ### Page 1: Overview Dashboard
-<img width="1453" height="820" alt="Screenshot (265)" src="https://github.com/user-attachments/assets/e0c600ff-3ccf-46ff-9017-4ae324b06b97" />
-
 Five KPI cards (total appointments, No-Show Rate, Attended Rate %, Cancelled Rate %, No-Shows), the outcome donut (48.46% No-Show, 46.28% Attended, 5.26% Cancelled), the monthly no-show rate, and no-shows by gender. Slicers for appointment type, appointment date and reminder sent filter this page only.
-
+<img width="1453" height="820" alt="Screenshot (265)" src="https://github.com/user-attachments/assets/e0c600ff-3ccf-46ff-9017-4ae324b06b97" />
 ### Page 2: Timing and Booking Patterns
 <img width="1451" height="819" alt="Screenshot (266)" src="https://github.com/user-attachments/assets/285a25b9-a884-4a01-b17d-05dc3b2482dc" />
 
