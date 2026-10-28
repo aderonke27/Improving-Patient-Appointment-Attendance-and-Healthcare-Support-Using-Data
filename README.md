@@ -25,24 +25,23 @@
 
 ## Project Overview
   This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
-  HealthConnect Clinic is a fictional appointment-based healthcare provider used as a realistic case study for the programme. The project simulates a real-world data team, with interns working across five professional tracks — Project Management, Data Analytics, Data Science, Machine Learning Engineering, and Generative AI — all contributing to one shared objective: helping the clinic use data and AI to improve appointment attendance and patient support.
-  As the Data Analyst on this project, my contribution focuses on exploring the clinic's appointment data, assessing its quality, identifying patterns behind missed appointments, defining relevant KPIs, and generating actionable business insights. This work forms the analytical foundation that other tracks — particularly Data Science — build on for further modeling and prediction work.
-
+  HealthConnect Clinic is an appointment-based healthcare provider used as a realistic case study for the programme. The project involves helping the clinic use data and AI to improve appointment attendance and patient support.
+  As the Data Analyst on this project, my contribution focused on exploring the clinic's appointment data, assessing its quality, identifying patterns behind missed appointments, defining relevant KPIs, and generating actionable business insights. In this project, I also worked with a Data Scientist to build out further modeling and prediction work.
 ## Business Problem
   HealthConnect Clinic loses operational efficiency and patient care capacity because a significant number of scheduled appointments end in no-shows. Staff don't have a clear, data-driven understanding of which patients, appointment types, and booking conditions are most associated with missed visits, and appointment slots freed up by no-shows go unused.
-  As a result, the clinic cannot reliably predict attendance risk, target reminders effectively, or plan capacity — leading to wasted clinical resources, longer wait times for other patients, and a weaker patient support experience.
+  As a result, the clinic cannot reliably predict attendance risk, target reminders effectively, or plan capacity, leading to wasted clinical resources, longer wait times for other patients, and a weaker patient support experience.
 
 ## Central Project Question
-How can HealthConnect Clinic use data to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
+How can HealthConnect Clinic use data and AI to understand and reduce missed appointments, and improve how appointment slots and patient support resources are managed?
 
 ## Project Questions
-* What % of appointments end in No-Show / Attended / Cancelled?
+* What percentage of appointments end in No-Show / Attended / Cancelled?
 * What is the trend of the no-show rate over time?
 * How many visits were lost to no-shows in total?
 * Which day of the week had the highest no-show rate?
 * Which time slot had the highest no-show rate?
 * Did appointments booked further in advance have higher no-show rates?
-* Which day × time combinations had the worst rates?
+* Which day and time combinations had the worst rates?
 * Did no-show rates differ by age group?
 * Which gender is at risk of no-show?
 * Does distance correlate with no-shows?
@@ -59,12 +58,10 @@ How can HealthConnect Clinic use data to understand and reduce missed appointmen
 
 ## Dataset Overview
 ### Dataset description
-The HealthConnect Appointment Dataset is a fictional, anonymized dataset representing patient appointment records at HealthConnect Clinic. It captures patient demographics, appointment scheduling details, booking behavior, prior appointment history, reminder activity, distance to the clinic, waiting time, and the final outcome of each appointment (Attended, No-Show or Cancelled).
+The HealthConnect Appointment Dataset is an anonymized dataset representing patient appointment records at HealthConnect Clinic. It captures patient demographics, appointment scheduling details, booking behavior, prior appointment history, reminder activity, distance to the clinic, waiting time, and the final outcome of each appointment (Attended, No-Show or Cancelled).
 ### Dataset Size
 * Records (rows): 5,000 individual appointments
 * Variables (columns): 18
-* Unique patients: 1,696 (an average of roughly 2.9 appointments per patient, confirming the dataset is appointment-level, not patient-level, and that most patients appear more than once)
-* Appointment ID range: HC-00001 to HC-05000 (no gaps or duplicate IDs found)
 * Date coverage: booking dates from November 2024 to June 2026; appointment dates from January 2025 to June 2026
 ### Variable categories
 The 18 variables fall into six broad categories relevant to the no-show problem:
@@ -75,8 +72,6 @@ The 18 variables fall into six broad categories relevant to the no-show problem:
 *	Reminder information: reminder_sent, reminder_channel
 *	Clinic logistics: distance_to_clinics_km, waiting_time_minutes
 *	Outcome: appointment_outcome 
-### Data source
-The dataset was provided by AnalystLab Africa as an official project resource for the HealthConnect Experience Lab. It is explicitly fictional and synthetic, generated to simulate realistic clinic appointment data for learning purposes. No real patient information is contained in the file.
 
 ## Data Quality Assessment
 * In the raw CSV file, booking_date and appointment_date were stored as text strings instead of date type. All other data types were correct.
@@ -85,7 +80,6 @@ The dataset was provided by AnalystLab Africa as an official project resource fo
 * The dataset exhibited high format uniformity and consistency.
 
 ## Tools Used
-* Microsoft Excel
 * Power query
 * Microsoft Power BI
 
@@ -98,41 +92,14 @@ The dataset was provided by AnalystLab Africa as an official project resource fo
 * Used Power Query's "Remove Duplicates" preview on the full dataset and on `appointment_id` specifically. No duplicate rows or duplicate appointment IDs were found
 * Reviewed unique values across `gender`, `age_group`, `appointment_type`, `appointment_day`, `appointment_time`, `reminder_sent`, `reminder_channel`, and `appointment_outcome` for inconsistent spelling, casing, or stray whitespace.
 * All categories were already standardized; no corrections were needed
-* Closed and loaded the validated query into a new sheet, then exported it as `HealthConnect_Appointment_Cleaned_Data.csv` for use in analysis.
+* Saved and closed the clean dataset and then imported it into Power BI for analysis and visualization.
 
 ## Importing the Dataset into Power BI
-## Importing the Dataset into Power BI
-
-**Source file:** `HealthConnect_Appointment_Cleaned_Data.csv` (5,000 rows, 18 columns, appointments from Jan 2025 to Jun 2026). The original `HealthConnect_Appointment_Data.csv` was never edited. Cleaned and derived files are saved separately in `data/processed/`.
-
-**Steps**
-
-1. Open Power BI Desktop and choose **Get Data > Text/CSV**, then select the cleaned file.
-2. Click **Transform Data** to open Power Query.
-3. Set the data types:
-   - `booking_date` and `appointment_date`: Date (they load as text)
-   - `age`, `booking_lead_days`, `previous_appointments`, `previous_no_shows`: Whole Number
-   - `distance_to_clinic_km` and `waiting_time_minutes`: Decimal Number
-   - IDs and categories such as `gender`, `appointment_type`, `reminder_channel` and `appointment_outcome`: Text
-4. Add the banded columns the segment charts use: Day Bucket, Time Bucket, Lead Time Bucket, Distance Bucket, Prior No-Shows Bucket, Visit Frequency Bucket and Waiting time Bucket. `age_group` came pre-banded.
-5. Leave missing values visible. Unrecorded distances and waiting times stay in an **Unknown** band instead of being imputed. A blank `reminder_channel` stays blank, because it only happens when no reminder was sent.
-6. Click **Close & Apply**. The model is one table, `HealthConnect_Appointment_Cleaned_Data`, with no relationships.
-
-**Quality checks before building anything**
-
-- Duplicate `appointment_id` values: none
-- Missing `reminder_channel`: 1,366 rows (27.3%), all where `reminder_sent` is No, so expected
-- Missing `distance_to_clinic_km`: 90 rows (1.8%)
-- Missing `waiting_time_minutes`: 60 rows (1.2%)
-- `booking_lead_days` against the date difference: 0 mismatches
-- `previous_no_shows` higher than `previous_appointments`: 0 records
-- Weekday against `appointment_date`: matches on every record
+* Opened Power BI Desktop and through the Get Data > Text/CSV, the cleaned dataset was selected
+* Since all transformation was don in Excel, the cleaned dataset was loaded directly into Power BI
 
 ## Data Analysis
-
 ### DAX Measures
-
-> Note for me: Power BI stores the measure code in a compressed model, so I couldn't copy it out of `AnalystLab_W5_P1.pbix`. The measure names below are exactly the ones in the file. The code is the standard definition for each. Open the `.pbix`, click each measure, and paste the real DAX over mine if it differs.
 
 ```dax
 Total Appointments =
@@ -177,8 +144,7 @@ Total Appointments is the denominator for every rate. No-Show Rate % drives the 
 The outcome donut on Page 1 counts `appointment_id` directly instead of using Total Appointments. I compared the two in Week 7 and they return the same total.
 
 ### KPIs Tracked
-
-The five KPIs were defined in Week 4, calculated in Week 5, tested statistically by the Data Science track in Week 6, and rechecked against the raw data in Week 7.
+The five KPIs tracked were defined, calculated, tested statistically by the Data Scientist, and rechecked against the raw data;
 
 **1. Overall No-Show Rate.** Business question: what is the no-show rate, and how does it vary by appointment type, day and time? Result: **48.46%** of all appointments (2,423 of 5,000), or **51.15%** when Cancelled appointments are left out. Nearly one appointment in two is missed, and the monthly rate stays roughly between 42% and 54%, so the problem is structural, not seasonal.
 
