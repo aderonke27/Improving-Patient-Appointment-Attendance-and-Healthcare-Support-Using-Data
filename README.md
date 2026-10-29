@@ -27,6 +27,7 @@
   This repository documents my work as the Data Analyst on the HealthConnect Clinic Experience Lab, a multidisciplinary project completed as part of the AnalystLab Africa Experience Lab internship programme.
   HealthConnect Clinic is an appointment-based healthcare provider used as a realistic case study for the programme. The project involves helping the clinic use data and AI to improve appointment attendance and patient support.
   As the Data Analyst on this project, my contribution focused on exploring the clinic's appointment data, assessing its quality, identifying patterns behind missed appointments, defining relevant KPIs, and generating actionable business insights. In this project, I also worked with a Data Scientist to build out further modeling and prediction work.
+  
 ## Business Problem
   HealthConnect Clinic loses operational efficiency and patient care capacity because a significant number of scheduled appointments end in no-shows. Staff don't have a clear, data-driven understanding of which patients, appointment types, and booking conditions are most associated with missed visits, and appointment slots freed up by no-shows go unused.
   As a result, the clinic cannot reliably predict attendance risk, target reminders effectively, or plan capacity, leading to wasted clinical resources, longer wait times for other patients, and a weaker patient support experience.
