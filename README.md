@@ -168,41 +168,79 @@ Distance by age group, reminder sent against not sent, visit frequency, distance
 No-show rate by appointment type and by reminder channel, no-shows by waiting time, no-shows by month, no-show counts by appointment type, and a prior-no-shows by lead-time matrix. Follow-up has the highest rate (51.23%) but General Consultation loses the most slots (973).
 
 ## Key Findings
-
-1. **Booking lead time is the strongest driver of no-shows.** Cramér's V = 0.28, p < 0.0001. The rate climbs close to linearly across five bands, from 29.47% at 0-7 days to 71.36% at 46-60 days.
-2. **Prior no-show history is real but weaker alone than it looked.** Point-biserial r = 0.12, p < 0.0001. Its value shows up when you combine it with lead time.
-3. **The two factors compound.** 2+ prior no-shows with a 31+ day lead time gives 75.56% no-shows, 3.3 times the lowest-risk group.
-4. **Reminders help modestly, and SMS is the best channel.** SMS beats Email and WhatsApp by 2.7 to 4 percentage points. This is my own finding and hasn't been significance-tested.
-5. **Age, gender, appointment day and appointment time show no relationship with no-shows.** The p-values are 0.236, 0.401, 0.382 and 0.677.
-6. **Rate and count tell different stories.** Follow-up has the highest rate, but General Consultation loses the most slots because it has the most bookings.
-7. **Distance is a small effect.** It's statistically real but too small to build a programme around yet.
-8. **The model ceiling is a data limit.** Data Science's baseline reaches about 66-67% ROC-AUC, and an independent Random Forest check gave the same ceiling. Better prediction needs new fields, not a fancier algorithm.
-9. **The dashboard numbers reconcile.** In Week 7 all five KPI cards, the Worst Month card, the segment charts, three slicers and every filter layer matched manual recalculation. No issues were found, so nothing changed.
+1. Of 5,000 appointments, 2,423 were no-shows (48.46%), 46.28% were attended and 5.26% were cancelled. More patients skip than show up. That’s far above typical clinic no-show rates, so it’s worth checking the data definitions before presenting it.
+2. Only about 5% of patients cancel. Nearly all missed slots are silent no-shows, so the clinic gets no warning and can’t rebook them.
+3. The gender split of no-shows is about even (Female 49.73%, Male 48.33%, Prefer not to say 1.94%). Gender isn’t a useful targeting factor. Note these are shares of no-shows, not rates within each gender.
+4. The monthly no-show rate swings a lot. July and December peak, while April and November dip hard. The “Worst Month Rate” of 53.85% is probably December.
+5. Lead time is the strongest driver. Bookings made 31–60 days ahead no-show at 60.49%, against 27.81% for 0–7 days. The rate falls steadily as the gap shrinks (43.21% for 15–30 days, 33.55% for 8–14 days).
+6. Friday evening is the worst slot at 58.51%, followed by Thursday afternoon (53.47%) and Wednesday evening (51.40%). Friday overall looks fine (46.57%), so the evening slot is hiding the problem.
+7. Sunday is the worst day overall (50.47%) and Tuesday the best (47.02%). The gap is only about 3 points.
+8. Time of day matters little: Morning 48.14%, Afternoon 48.38%, Evening 49.78%.
+9. Age shows a small spread. Patients 65+ are the most reliable (45.12%). Those aged 55–64 (50.75%), 25–34 (50.70%) and 18–24 (50.18%) are the least.
+10. Past no-shows predict future ones almost in a straight line. The rate goes from 43.51% (none) to 53.49% (1), 59.36% (2), 67.95% (3) and 73.33% (4+). This is the cleanest risk flag in the data.
+11. Reminders help but not by much. Patients who got one no-show at 47.36% versus 51.39% for those who didn’t, a gap of about 4 points.
+12. Frequent visitors aren’t more reliable. Patients with 6+ visits have the highest rate (53.38%) and those with 0–1 visits the lowest (45.21%). That’s counterintuitive and might point to chronic-care patients who feel less urgency, or to a data quirk.
+13. Distance doesn’t work the way you’d expect either. Patients 25+ km away no-show least (46.47%), while those 0–5 km away sit at 49.37%. Patients with unknown distance are worst at 52.22%, which looks like a data capture problem more than a real effect.
+14. Some age and distance cells are very high (35–44 with unknown distance at 68.42%, 18–24 at 62.50%). They probably rest on small numbers, so treat them with caution.
+15. SMS is the best reminder channel (45.75%), then Email (48.41%) and WhatsApp (49.77%). No reminder is worst at 51.39%. WhatsApp is only 1.6 points better than sending nothing, so it’s underperforming.
+16. Follow-ups have the highest no-show rate by type (51.23%) and General Consultation the lowest (46.64%). By volume, though, General Consultation loses the most slots (973), then Follow-up (728), Specialist (427) and Diagnostic (295).
+17. Lead time and past no-shows compound each other. Someone with 0 past no-shows booked 0–7 days out misses 21.77% of the time. Someone with 2+ past no-shows booked 31–60 days out misses 71–86% of the time. A few cells hit 100% but are almost certainly tiny samples.
+18. Waiting time shows most no-shows (1,297) in the 16–30 minute bucket. This is a count, not a rate, so it mostly reflects where the volume sits. Also, a no-show by definition didn’t wait, so it’s worth checking what this field actually represents.
+19. The No-Shows by Month count drops sharply after June. That’s probably the date filter ending at 6/30/2026, so months from July on only have 2025 data. Don’t read it as a real improvement.
 
 ## Recommendations
+1. Limit long lead times. This is the biggest lever. A 60% no-show rate at 31-60 days versus 28% at 0-7 days means the further out you book, the more slots you lose. Two ways to handle it:
+  * Cap routine bookings at around 14 to 30 days where clinically possible.
+  * For anything that must be booked far out, require a confirmation at 7 days and again at 48 hours. If the patient doesn’t confirm, release the slot.
+2. Make SMS the default reminder. It has the lowest no-show rate (45.75%), and 51.39% of patients with no reminder miss their visit. Send two reminders, one a few days before and one the day before, rather than one. Look into why WhatsApp (49.77%) barely beats sending nothing. It could be message wording, timing, or delivery problems.
+3. Fix the data gaps. Before presenting these dashboards to leadership, clean up “Unknown” distance and waiting time. Those fields skew several charts, and the waiting-time chart for no-shows doesn’t make logical sense as it stands.
+4. Build a simple risk score. Past no-shows are the cleanest predictor in the data, rising from 43.51% to 73.33%. Combine that with lead time and you can sort every booking into low, medium or high risk. For high-risk patients (2+ past no-shows, booked 30+ days out), use a phone call instead of a text, or ask for a small deposit or confirmation. For the highest tier, overbook those slots so a miss doesn’t leave the clinician idle.
+5. Overbook selectively, not across the board. Friday evening (58.51%) and Thursday afternoon (53.47%) are the clear problem slots. Overbooking those two is safer than a clinic-wide policy, since most other slots sit between 44% and 51%.
+6. Focus on General Consultation and Follow-ups. General Consultation loses the most slots (973), and Follow-ups have the highest rate (51.23%). For follow-ups, try booking the next visit before the patient leaves, so the gap is short, and tie it to the reminder flow.
+7. Leave gender and distance alone. Gender is evenly split and distance runs opposite to what you’d expect, so neither is worth building a program around.
+8. Look into frequent visitors. Patients with 6+ visits no-show more (53.38%). Find out whether these are chronic-care patients, and if so, a different reminder or a standing appointment arrangement might suit them better.
 
-1. **Add a reconfirmation step for bookings made 31+ days ahead**, around the 7-day mark. Risk is concentrated in the 46-60 day range, not spread across all long lead times.
-2. **Deploy the two-field high-risk rule now.** Flag patients with 2+ prior no-shows and a 31+ day lead time. A spreadsheet filter or dashboard flag is enough, and it doesn't need a production model.
-3. **Move reminders toward SMS** where patient contact preferences allow, and cover the appointments that currently get no reminder at all.
-4. **Plan capacity with counts as well as rates.** Use lost-slot volume when deciding where to add overbooking buffers or staff cover.
-5. **Don't spend effort targeting by age, gender, weekday or time of day.** None of them showed a real relationship.
-6. **Treat distance as secondary** until there's more data on patients who live far away.
-7. **Consider shorter booking windows** where clinically appropriate. Lead time is the strongest factor and the one the clinic controls.
+## Cross-Track Collaboration: Data Analytics and Data Science
+I worked with the Data Science track on one dependency. My dashboard findings (lead time, prior no-shows and reminders) were the candidate features for their no-show model. In return, I needed their statistical testing to know which of my findings were strong enough to act on.
 
-## Cross-Track Collaboration Summary
+I sent Data Science my final KPI results, the lead-time by prior-no-shows matrix and the reminder-channel findings. I also warned them that distance and waiting time weren't safe to use as model features. Distance showed no clear pattern at the banding I used, and waiting time had unclear meaning. This stopped the baseline model from relying on those two fields blindly.
+Evidence: Week 5 report, section 11.
 
-My main partner was **Data Science**. Project Management was the second link, for the final presentation.
+I sent the same findings as candidate features, and Data Science tested them. They ran chi-square and Mann-Whitney tests with effect sizes on every variable, plus an independent Random Forest model as a cross-check.
 
-**Week 5.** I sent Data Science my final KPI results, the lead-time by prior-no-shows matrix and the reminder-channel findings. I also warned them that distance and waiting time weren't safe to use as model features. That kept the baseline model from relying on those two fields blindly. Evidence: Week 5 report, section 11.
+What the testing showed:
+* **Lead time is the strongest driver.** Cramér's V = 0.28, p < 0.0001. Splitting my 31-60 day bar showed 57.03% at 31-45 days and 71.36% at 46-60 days, a jump the single bar hid.
+* **Prior no-shows are real but weaker alone.** r = 0.12. The Random Forest agreed that lead time and prior no-shows are the top two features.
+* **Combining them gives a sharper signal.** Patients with 2+ prior no-shows and a 31+ day lead time miss 75.56% of appointments (n = 225), against 22.82% for the lowest-risk group (n = 355). That's a 3.3x gap.
+* **Four variables showed no relationship with no-shows:** age, gender, appointment day and appointment time (p = 0.236, 0.401, 0.382 and 0.677).
+* **The model's 66-67% ROC-AUC ceiling is a data limit.** Both models stalled at the same level, so better prediction needs new fields, not a different algorithm.
 
-**Week 6.** I sent the same findings as candidate features. Data Science sent back chi-square and Mann-Whitney tests with effect sizes, an independent Random Forest cross-check, the compound risk segment, a five-band lead-time structure and dashboard recommendations. As a result, the lead-time analysis moved from four bands to five, the two-field risk rule was created, four variables were ruled out, and the model's 66-67% ceiling was reframed as a data limit. Evidence: Week 6 Cross-Track Integration Evidence, Data Science's Deep-Dive Report and its notebook.
+What changed for me: my lead-time analysis moved from four bands to five, I added a two-field high-risk rule to my recommendations, and I dropped the four variables from future targeting.
+Evidence: Week 6 Cross-Track Integration Evidence, Data Science's Deep-Dive Report and its notebook.
 
-**Week 7.** I rechecked the segment figures for reminder status, lead time and prior no-shows, and Data Science confirmed which features the candidate model uses. The dashboard figures and the model's feature values matched, so neither side needed to change anything. Evidence: Week 7 Testing & Refinement Report, section 8.
+### Week 7: Cross-checking my validated dashboard against the model
 
-**Week 8.** I handed over the final KPIs, validated findings, insights and recommendations, and Data Science confirmed no model change affects the validated segments. The analytics content went into the final presentation structure with Project Management. Evidence: Week 8 Final Analytics Package, sections 9 and 10.
+I tested my dashboard against the cleaned data, and every KPI and segment check passed. I then gave Data Science my re-validated no-show rates for reminder status, lead time and prior no-shows. They confirmed which features the candidate model uses, and I compared those feature values with my dashboard figures.
+
+Result: the figures matched on the first check, so neither track needed to change anything. This confirmed the dashboard and the model tell the same story before final integration.
+Evidence: Week 7 Testing & Refinement Report, section 8.
+
+### Week 8: Final handoff
+
+I handed over my final KPIs, validated findings, insights and recommendations. Data Science confirmed that no model change affects the validated segments. The analytics content went into the final presentation structure with Project Management.
+Evidence: Week 8 Final Analytics Package, sections 9 and 10.
+
+### What the collaboration changed
+
+- My findings moved from "this pattern appears in the data" to "this pattern is statistically confirmed, with a measured effect size".
+- The clinic gets a high-risk rule it can use now, before any production model exists.
+- The analytics dashboard and the predictive model were checked against each other and agree.
+
+### Still open
+
+The Power BI dashboard still shows the four Week 5 lead-time bands. The five-band split comes from Data Science's analysis and is not yet built into the dashboard. This is listed under Next Steps.
 
 ## Limitations
-
 - **The data is fictional and synthetic.** Effects may be flatter or sharper than in a real clinic, so read the findings as true of this dataset, not as clinical fact.
 - **Some segments are small.** 4+ prior no-shows has 15 records and the 31-50 km band has 70. Treat those figures as direction only.
 - **The dashboard still uses the Week 5 bands for lead time and distance.** Lead time shows four bands (the 31-60 days bar is 60.49%), not the five-band split Data Science validated. Distance shows only three bands (0-5 km, 25+ km, Unknown) although the data runs up to 45 km, so most appointments don't appear in that chart.
@@ -214,23 +252,14 @@ My main partner was **Data Science**. Project Management was the second link, fo
 - **Week 7 testing relied on the cleaned file.** I didn't re-run the earlier cleaning steps, and the segment spot-checks covered representative categories, not every combination.
 
 ## Assumptions
+* Cancelled is different from No-Show. A patient who cancels in advance is treated as operationally different from one who doesn't turn up, so the two are never merged.
+* A blank `reminder_channel` means no reminder was sent. It isn't a data error.
+* "Prefer not to say" (108 records, 2.2%) stays as its own gender group.
+* Missing distances and waiting times are kept as Unknown, not imputed, so a data gap isn't dressed up as a real value.
+* Patient IDs repeat across appointments by design. The data is appointment-level, not patient-level (1,696 patients, about 2.9 appointments each).
 
-- The synthetic dataset is realistic enough to practise real appointment analysis.
-- **Cancelled is different from No-Show.** A patient who cancels in advance is treated as operationally different from one who doesn't turn up, so the two are never merged.
-- A blank `reminder_channel` means no reminder was sent. It isn't a data error.
-- "Prefer not to say" (108 records, 2.2%) stays as its own gender group.
-- Missing distances and waiting times are kept as **Unknown**, not imputed, so a data gap isn't dressed up as a real value.
-- Patient IDs repeat across appointments by design. The data is appointment-level, not patient-level (1,696 patients, about 2.9 appointments each).
-- The cleaned file is correct as provided.
-
-## Next Steps
-
-- **Update the dashboard bands.** Replace the four lead-time bands with the five-band split (0-7, 8-14, 15-30, 31-45, 46-60 days) and rebuild the distance chart so every distance range appears. Then rerun the Week 7 checks.
-- **Split the monthly charts by year**, or add a year slicer, so the count by month isn't skewed.
-- **Test reminder channel statistically** (SMS against Email against WhatsApp) to confirm or drop the finding.
-- **Confirm what `waiting_time_minutes` measures** with clinic operations before using it as a predictor.
-- **Add a patient-level table and a live high-risk flag** (2+ prior no-shows, 31+ day lead time) for front-desk use.
-- **Work with Data Science on new fields**, such as reminder-response history, cost or insurance, weather and transport access, to get past the 66-67% ROC-AUC ceiling.
+## Conclusion
+This project found that the biggest reason patients miss appointments is how long they wait between booking and the visit. Lead time had the strongest link to no-shows (Cramér's V = 0.28, p < 0.0001), and splitting the 31-60 day band showed the rate jumping from 57.03% at 31-45 days to 71.36% at 46-60 days. Prior no-shows mattered too, but less on their own (r = 0.12). Together they gave the clearest signal: patients with 2 or more prior no-shows and a lead time of 31+ days missed 75.56% of appointments, against 22.82% for the lowest-risk group, a 3.3x gap. Age, gender, appointment day and appointment time showed no relationship with no-shows, so I dropped them from future targeting. The predictive models stopped at a ROC-AUC of 66-67%, and since both models reached the same level, the limit comes from the data. Better prediction will need new fields, not a different algorithm. The dashboard and the model were also checked against each other and told the same story. The clinic can use the two-field high-risk rule right away, without waiting for a production model. Booking patients earlier than necessary is the main thing to avoid, and anyone with a history of no-shows who is booked far ahead should get extra reminders or a follow-up call. The findings come with limits. The data is synthetic, some segments are small, and the dashboard still uses the older lead-time and distance bands. Cost of care, transport, weather and the quality of staff-patient communication aren't in the data. Adding them would be the most useful next step.
 
 ## Contact Information
 * LinkedIn: https://www.linkedin.com/in/estheraderonke
