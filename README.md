@@ -1,6 +1,6 @@
 # Improving-Patient-Appointment-Attendance-and-Healthcare-Support-Using-Data-And-AI
 ![Power BI](https://img.shields.io/badge/Tool-Power%20BI-F2C811?style=flat&logo=powerbi&logo)
-![Domain](https://img.shields.io/badge/Domain-Healthcare%20Analytics-purple)
+![Domain](https://img.shields.io/badge/Domain-Healthcare%20Analytics-teal)
 
 ## Table of Contents
 1. [Project Overview](#project-overview)  
